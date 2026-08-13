@@ -1,29 +1,44 @@
-# Sai Graphic Designs Website
+# vCard - Personal portfolio
 
-A fast, responsive, static business website built with plain HTML, CSS and JavaScript.
+![GitHub repo size](https://img.shields.io/github/repo-size/codewithsadee/vcard-personal-portfolio)
+![GitHub stars](https://img.shields.io/github/stars/codewithsadee/vcard-personal-portfolio?style=social)
+![GitHub forks](https://img.shields.io/github/forks/codewithsadee/vcard-personal-portfolio?style=social)
+[![Twitter Follow](https://img.shields.io/twitter/follow/codewithsadee_?style=social)](https://twitter.com/intent/follow?screen_name=codewithsadee_)
+[![YouTube Video Views](https://img.shields.io/youtube/views/SoxmIlgf2zM?style=social)](https://youtu.be/SoxmIlgf2zM)
 
-## Files
-- `index.html` — website structure and content
-- `style.css` — responsive design
-- `script.js` — menu, portfolio filters and WhatsApp enquiry form
-- `assets/` — logo/favicon and your future portfolio images
+vCard is a fully responsive personal portfolio website, responsive for all devices, built using HTML, CSS, and JavaScript.
 
-## Replace portfolio placeholders
-The current portfolio uses CSS artwork placeholders so the site works immediately.
-To use your real projects, add images to `assets/` and replace the `.project-art` blocks in `index.html` with `<img>` elements.
+## Demo
 
-## Contact details currently used
-Phone/WhatsApp: +91 63811 28781
-Email: saigraphicdesings@gmail.com
+![vCard Desktop Demo](./website-demo-image/desktop.png "Desktop Demo")
+![vCard Mobile Demo](./website-demo-image/mobile.png "Mobile Demo")
 
-## Free Cloudflare Pages deployment
-1. Create a GitHub repository, e.g. `sai-graphic-designs`.
-2. Upload `index.html`, `style.css`, `script.js`, `assets/`, and this README.
-3. In Cloudflare: Workers & Pages → Create application → Pages → Import existing Git repository.
-4. Select the GitHub repository.
-5. Production branch: `main`.
-6. Build command: `exit 0` (or leave blank for a plain static site).
-7. Build output directory: the repository root / your static site directory.
-8. Deploy.
+## Prerequisites
 
-Cloudflare will provide a `*.pages.dev` address.
+Before you begin, ensure you have met the following requirements:
+
+* [Git](https://git-scm.com/downloads "Download Git") must be installed on your operating system.
+
+## Installing vCard
+
+To install **vCard**, follow these steps:
+
+Linux and macOS:
+
+```bash
+sudo git clone https://github.com/codewithsadee/vcard-personal-portfolio.git
+```
+
+Windows:
+
+```bash
+git clone https://github.com/codewithsadee/vcard-personal-portfolio.git
+```
+
+## Contact
+
+If you want to contact me you can reach me at [Twitter](https://www.x.com/codewithsadee_).
+
+## License
+
+MIT
