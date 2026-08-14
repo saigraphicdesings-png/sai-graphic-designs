@@ -34,34 +34,27 @@ navLinks.forEach(function (link) {
 
     console.log("CLICKED:", pageName);
 
-    /* Remove active from all buttons */
     navLinks.forEach(function (nav) {
       nav.classList.remove("active");
     });
 
-    /* Remove active from all pages */
     pages.forEach(function (page) {
       page.classList.remove("active");
     });
 
-    /* Activate clicked button */
     this.classList.add("active");
 
-    /* Find requested page */
     const selectedPage = document.querySelector(
       'article[data-page="' + pageName + '"]'
     );
 
     console.log("SELECTED PAGE:", selectedPage);
 
-    /* Show requested page */
     if (selectedPage) {
       selectedPage.classList.add("active");
-
       console.log("OPENED:", pageName);
     }
 
-    /* Scroll to top */
     window.scrollTo({
       top: 0,
       behavior: "smooth"
