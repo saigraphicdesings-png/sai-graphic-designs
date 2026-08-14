@@ -1,47 +1,52 @@
 "use strict";
 
-/*-----------------------------------*\
-  #NAVIGATION
-\*-----------------------------------*/
+/* =========================
+   SIDEBAR TOGGLE
+========================= */
+
+const sidebar = document.querySelector("[data-sidebar]");
+const sidebarBtn = document.querySelector("[data-sidebar-btn]");
+
+if (sidebarBtn && sidebar) {
+  sidebarBtn.addEventListener("click", function () {
+    sidebar.classList.toggle("active");
+  });
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
 
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-navigationLinks.forEach((link) => {
+navigationLinks.forEach(function (link) {
 
   link.addEventListener("click", function () {
 
-    // Get clicked navigation name
-    const targetPage = this.textContent.trim().toLowerCase();
-
-    console.log("Clicked:", targetPage);
-
-    // Remove active from every page
-    pages.forEach((page) => {
-      page.classList.remove("active");
-    });
-
-    // Find and activate selected page
-    const selectedPage = document.querySelector(
-      `[data-page="${targetPage}"]`
-    );
-
-    if (selectedPage) {
-      selectedPage.classList.add("active");
-      console.log("Opening:", targetPage);
-    } else {
-      console.error("Page not found:", targetPage);
-    }
+    const targetPage = link.textContent.trim().toLowerCase();
 
     // Remove active from all navigation buttons
-    navigationLinks.forEach((navLink) => {
+    navigationLinks.forEach(function (navLink) {
       navLink.classList.remove("active");
     });
 
-    // Activate clicked navigation button
-    this.classList.add("active");
+    // Add active to clicked button
+    link.classList.add("active");
 
-    // Scroll to top
+    // Show selected page
+    pages.forEach(function (page) {
+
+      if (page.dataset.page === targetPage) {
+        page.classList.add("active");
+      } else {
+        page.classList.remove("active");
+      }
+
+    });
+
+    // Scroll page to top
     window.scrollTo({
       top: 0,
       behavior: "smooth"
@@ -51,165 +56,85 @@ navigationLinks.forEach((link) => {
 
 });
 
-/* =========================================
-   SIDEBAR CONTACT TOGGLE
-========================================= */
 
-const sidebar = document.querySelector('[data-sidebar]');
-const sidebarBtn = document.querySelector('[data-sidebar-btn]');
-
-
-if (sidebarBtn && sidebar) {
-
-  sidebarBtn.addEventListener('click', function () {
-
-    sidebar.classList.toggle('active');
-
-  });
-
-}
-
-
-
-/* =========================================
+/* =========================
    PORTFOLIO FILTER
-========================================= */
+========================= */
 
-const filterButtons = document.querySelectorAll('[data-filter-btn]');
-const filterItems = document.querySelectorAll('[data-filter-item]');
+const filterButtons = document.querySelectorAll("[data-filter-btn]");
+const filterItems = document.querySelectorAll("[data-filter-item]");
 
+filterButtons.forEach(function (button) {
 
-let lastClickedBtn = filterButtons[0];
+  button.addEventListener("click", function () {
 
+    const category = button.textContent.trim().toLowerCase();
 
-function filterProjects(category) {
-
-  filterItems.forEach((item) => {
-
-    const itemCategory = item.dataset.category;
-
-    if (
-      category === 'all' ||
-      category === itemCategory
-    ) {
-
-      item.classList.add('active');
-
-    } else {
-
-      item.classList.remove('active');
-
-    }
-
-  });
-
-}
-
-
-filterButtons.forEach((button) => {
-
-  button.addEventListener('click', function () {
-
-    const selectedCategory = this.textContent
-      .trim()
-      .toLowerCase();
-
-
-    /* Remove active from all filter buttons */
-
-    filterButtons.forEach((btn) => {
-      btn.classList.remove('active');
+    filterButtons.forEach(function (btn) {
+      btn.classList.remove("active");
     });
 
+    button.classList.add("active");
 
-    /* Activate clicked button */
+    filterItems.forEach(function (item) {
 
-    this.classList.add('active');
+      if (
+        category === "all" ||
+        item.dataset.category === category
+      ) {
+        item.classList.add("active");
+      } else {
+        item.classList.remove("active");
+      }
 
-
-    /* Remember selected button */
-
-    lastClickedBtn = this;
-
-
-    /* Filter projects */
-
-    filterProjects(selectedCategory);
+    });
 
   });
 
 });
 
 
-
-/* =========================================
+/* =========================
    MOBILE PORTFOLIO FILTER
-========================================= */
+========================= */
 
-const select = document.querySelector('[data-select]');
-const selectItems = document.querySelectorAll('[data-select-item]');
-const selectValue = document.querySelector('[data-select-value]');
-
+const select = document.querySelector("[data-select]");
+const selectValue = document.querySelector("[data-select-value]");
+const selectItems = document.querySelectorAll("[data-select-item]");
 
 if (select) {
 
-  select.addEventListener('click', function () {
-
-    this.classList.toggle('active');
-
+  select.addEventListener("click", function () {
+    select.classList.toggle("active");
   });
 
 }
 
+selectItems.forEach(function (item) {
 
-selectItems.forEach((item) => {
+  item.addEventListener("click", function () {
 
-  item.addEventListener('click', function () {
-
-    const selectedValue = this.textContent.trim();
-
-    const selectedCategory = selectedValue.toLowerCase();
-
-
-    /* Update select text */
+    const selectedValue = item.textContent.trim();
 
     if (selectValue) {
-
       selectValue.textContent = selectedValue;
-
     }
-
-
-    /* Close dropdown */
 
     if (select) {
-
-      select.classList.remove('active');
-
+      select.classList.remove("active");
     }
 
+    const category = selectedValue.toLowerCase();
 
-    /* Filter projects */
+    filterItems.forEach(function (project) {
 
-    filterProjects(selectedCategory);
-
-
-    /* Update desktop filter button */
-
-    filterButtons.forEach((button) => {
-
-      const buttonText = button.textContent.trim();
-
-      if (buttonText.toLowerCase() === selectedCategory) {
-
-        button.classList.add('active');
-
-        lastClickedBtn = button;
-
+      if (
+        category === "all" ||
+        project.dataset.category === category
+      ) {
+        project.classList.add("active");
       } else {
-
-        button.classList.remove('active');
-
+        project.classList.remove("active");
       }
 
     });
@@ -219,229 +144,28 @@ selectItems.forEach((item) => {
 });
 
 
-
-/* =========================================
-   CLOSE MOBILE FILTER
-   WHEN CLICKING OUTSIDE
-========================================= */
-
-document.addEventListener('click', function (event) {
-
-  if (
-    select &&
-    !select.contains(event.target)
-  ) {
-
-    select.classList.remove('active');
-
-  }
-
-});
-
-
-
-/* =========================================
+/* =========================
    CONTACT FORM
-========================================= */
+========================= */
 
-const form = document.querySelector('[data-form]');
-const formInputs = document.querySelectorAll('[data-form-input]');
-const formButton = document.querySelector('[data-form-btn]');
+const form = document.querySelector("[data-form]");
+const formInputs = document.querySelectorAll("[data-form-input]");
+const formBtn = document.querySelector("[data-form-btn]");
 
+if (form && formInputs.length > 0 && formBtn) {
 
-if (form && formInputs.length && formButton) {
+  formInputs.forEach(function (input) {
 
+    input.addEventListener("input", function () {
 
-  /* Enable / disable button */
-
-  formInputs.forEach((input) => {
-
-    input.addEventListener('input', function () {
-
-      const allFieldsFilled = Array.from(formInputs)
-        .every((field) => field.value.trim() !== '');
-
-
-      if (allFieldsFilled) {
-
-        formButton.removeAttribute('disabled');
-
+      if (form.checkValidity()) {
+        formBtn.removeAttribute("disabled");
       } else {
-
-        formButton.setAttribute('disabled', '');
-
+        formBtn.setAttribute("disabled", "");
       }
 
     });
-
-  });
-
-
-  /* Submit form */
-
-  form.addEventListener('submit', function (event) {
-
-    event.preventDefault();
-
-
-    const name = form.querySelector(
-      'input[name="fullname"]'
-    ).value.trim();
-
-
-    const email = form.querySelector(
-      'input[name="email"]'
-    ).value.trim();
-
-
-    const message = form.querySelector(
-      'textarea[name="message"]'
-    ).value.trim();
-
-
-    if (!name || !email || !message) {
-
-      alert('Please fill in all fields.');
-
-      return;
-
-    }
-
-
-    /*
-      Opens the visitor's email application.
-      Change this email if required.
-    */
-
-    const recipient =
-      'saigraphicdesings@gmail.com';
-
-
-    const subject =
-      encodeURIComponent(
-        'New Design Enquiry from ' + name
-      );
-
-
-    const body =
-      encodeURIComponent(
-        'Name: ' + name +
-        '\n\n' +
-        'Email: ' + email +
-        '\n\n' +
-        'Message:\n' + message
-      );
-
-
-    const mailtoLink =
-      'mailto:' +
-      recipient +
-      '?subject=' +
-      subject +
-      '&body=' +
-      body;
-
-
-    window.location.href = mailtoLink;
-
-
-    /* Reset form */
-
-    form.reset();
-
-    formButton.setAttribute('disabled', '');
 
   });
 
 }
-
-
-
-/* =========================================
-   PORTFOLIO IMAGE LINKS
-========================================= */
-
-const projectLinks =
-  document.querySelectorAll('.project-item > a');
-
-
-projectLinks.forEach((link) => {
-
-  link.addEventListener('click', function (event) {
-
-    /*
-      Currently project links use #.
-      Prevent page jumping to the top.
-    */
-
-    const href = this.getAttribute('href');
-
-    if (href === '#') {
-
-      event.preventDefault();
-
-    }
-
-  });
-
-});
-
-
-
-/* =========================================
-   BLOG LINKS
-========================================= */
-
-const blogLinks =
-  document.querySelectorAll('.blog-post-item > a');
-
-
-blogLinks.forEach((link) => {
-
-  link.addEventListener('click', function (event) {
-
-    const href = this.getAttribute('href');
-
-    if (href === '#') {
-
-      event.preventDefault();
-
-    }
-
-  });
-
-});
-
-
-
-/* =========================================
-   CLIENT LINKS
-========================================= */
-
-const clientLinks =
-  document.querySelectorAll('.clients-item > a');
-
-
-clientLinks.forEach((link) => {
-
-  link.addEventListener('click', function (event) {
-
-    const href = this.getAttribute('href');
-
-    if (href === '#') {
-
-      event.preventDefault();
-
-    }
-
-  });
-
-});
-
-
-
-/* =========================================
-   INITIAL PORTFOLIO STATE
-========================================= */
-
-filterProjects('all');
