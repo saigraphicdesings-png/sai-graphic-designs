@@ -8,28 +8,37 @@ const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
 navigationLinks.forEach((link) => {
+
   link.addEventListener("click", function () {
 
+    // Get clicked navigation name
     const targetPage = this.textContent.trim().toLowerCase();
 
-    // Remove active from all pages
+    console.log("Clicked:", targetPage);
+
+    // Remove active from every page
     pages.forEach((page) => {
       page.classList.remove("active");
     });
 
-    // Add active to selected page
-    pages.forEach((page) => {
-      if (page.dataset.page === targetPage) {
-        page.classList.add("active");
-      }
-    });
+    // Find and activate selected page
+    const selectedPage = document.querySelector(
+      `[data-page="${targetPage}"]`
+    );
+
+    if (selectedPage) {
+      selectedPage.classList.add("active");
+      console.log("Opening:", targetPage);
+    } else {
+      console.error("Page not found:", targetPage);
+    }
 
     // Remove active from all navigation buttons
     navigationLinks.forEach((navLink) => {
       navLink.classList.remove("active");
     });
 
-    // Add active to clicked button
+    // Activate clicked navigation button
     this.classList.add("active");
 
     // Scroll to top
@@ -39,8 +48,8 @@ navigationLinks.forEach((link) => {
     });
 
   });
-});
 
+});
 
 /* =========================================
    SIDEBAR CONTACT TOGGLE
