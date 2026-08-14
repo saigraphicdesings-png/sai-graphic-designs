@@ -1,61 +1,41 @@
 "use strict";
 
-
-/* =========================
-   SIDEBAR TOGGLE
-========================= */
-
-const sidebar = document.querySelector("[data-sidebar]");
-const sidebarBtn = document.querySelector("[data-sidebar-btn]");
-
-if (sidebar && sidebarBtn) {
-
-  sidebarBtn.addEventListener("click", function () {
-    sidebar.classList.toggle("active");
-  });
-
-}
-
-
-/* =========================
+/* ================================
    PAGE NAVIGATION
-========================= */
+================================ */
 
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-navigationLinks.forEach(function (link) {
+navigationLinks.forEach((link) => {
 
   link.addEventListener("click", function () {
 
-    // Get page name directly from data-nav-link
-    const targetPage = link.getAttribute("data-nav-link");
+    const targetPage = this.dataset.navLink;
 
-    console.log("Opening page:", targetPage);
-
-    // Remove active from all navigation buttons
-    navigationLinks.forEach(function (navLink) {
-      navLink.classList.remove("active");
-    });
-
-    // Add active to clicked button
-    link.classList.add("active");
-
-    // Hide all pages
-    pages.forEach(function (page) {
+    /* Remove active from all pages */
+    pages.forEach((page) => {
       page.classList.remove("active");
     });
 
-    // Show selected page
-    const target = document.querySelector(
+    /* Remove active from all navigation buttons */
+    navigationLinks.forEach((navLink) => {
+      navLink.classList.remove("active");
+    });
+
+    /* Show selected page */
+    const targetElement = document.querySelector(
       `[data-page="${targetPage}"]`
     );
 
-    if (target) {
-      target.classList.add("active");
+    if (targetElement) {
+      targetElement.classList.add("active");
     }
 
-    // Scroll to top
+    /* Highlight selected navigation button */
+    this.classList.add("active");
+
+    /* Scroll to top */
     window.scrollTo({
       top: 0,
       behavior: "smooth"
@@ -66,30 +46,52 @@ navigationLinks.forEach(function (link) {
 });
 
 
-/* =========================
+/* ================================
+   SIDEBAR CONTACT BUTTON
+================================ */
+
+const sidebar = document.querySelector("[data-sidebar]");
+const sidebarBtn = document.querySelector("[data-sidebar-btn]");
+
+if (sidebarBtn && sidebar) {
+
+  sidebarBtn.addEventListener("click", function () {
+
+    sidebar.classList.toggle("active");
+
+  });
+
+}
+
+
+/* ================================
    PORTFOLIO FILTER
-========================= */
+================================ */
 
 const filterButtons = document.querySelectorAll("[data-filter-btn]");
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
-filterButtons.forEach(function (button) {
+filterButtons.forEach((button) => {
 
   button.addEventListener("click", function () {
 
-    const category = button.textContent.trim().toLowerCase();
+    const selectedCategory = this.textContent.trim().toLowerCase();
 
-    filterButtons.forEach(function (btn) {
+    /* Active filter button */
+    filterButtons.forEach((btn) => {
       btn.classList.remove("active");
     });
 
-    button.classList.add("active");
+    this.classList.add("active");
 
-    filterItems.forEach(function (item) {
+    /* Filter projects */
+    filterItems.forEach((item) => {
+
+      const itemCategory = item.dataset.category;
 
       if (
-        category === "all" ||
-        item.dataset.category === category
+        selectedCategory === "all" ||
+        selectedCategory === itemCategory
       ) {
         item.classList.add("active");
       } else {
@@ -103,40 +105,40 @@ filterButtons.forEach(function (button) {
 });
 
 
-/* =========================
+/* ================================
    MOBILE PORTFOLIO FILTER
-========================= */
+================================ */
 
 const select = document.querySelector("[data-select]");
 const selectValue = document.querySelector("[data-select-value]");
+const selectList = document.querySelector(".select-list");
 const selectItems = document.querySelectorAll("[data-select-item]");
 
 if (select) {
 
   select.addEventListener("click", function () {
     select.classList.toggle("active");
+
+    if (selectList) {
+      selectList.classList.toggle("active");
+    }
   });
 
 }
 
-
-selectItems.forEach(function (item) {
+selectItems.forEach((item) => {
 
   item.addEventListener("click", function () {
 
-    const selectedValue = item.textContent.trim();
+    const selectedCategory = this.textContent.trim();
 
     if (selectValue) {
-      selectValue.textContent = selectedValue;
+      selectValue.textContent = selectedCategory;
     }
 
-    if (select) {
-      select.classList.remove("active");
-    }
+    const category = selectedCategory.toLowerCase();
 
-    const category = selectedValue.toLowerCase();
-
-    filterItems.forEach(function (project) {
+    filterItems.forEach((project) => {
 
       if (
         category === "all" ||
@@ -149,29 +151,37 @@ selectItems.forEach(function (item) {
 
     });
 
+    if (select) {
+      select.classList.remove("active");
+    }
+
+    if (selectList) {
+      selectList.classList.remove("active");
+    }
+
   });
 
 });
 
 
-/* =========================
+/* ================================
    CONTACT FORM
-========================= */
+================================ */
 
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
-const formBtn = document.querySelector("[data-form-btn]");
+const formButton = document.querySelector("[data-form-btn]");
 
-if (form && formInputs.length > 0 && formBtn) {
+if (form && formButton) {
 
-  formInputs.forEach(function (input) {
+  formInputs.forEach((input) => {
 
     input.addEventListener("input", function () {
 
       if (form.checkValidity()) {
-        formBtn.removeAttribute("disabled");
+        formButton.removeAttribute("disabled");
       } else {
-        formBtn.setAttribute("disabled", "");
+        formButton.setAttribute("disabled", "");
       }
 
     });
