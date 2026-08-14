@@ -2873,3 +2873,594 @@ article.active {
   }
 
 }
+/* =========================================================
+   SAI GRAPHIC DESIGNS - FORCE LIGHT BRAND THEME
+   ========================================================= */
+
+/* BRAND COLORS */
+:root {
+  --brand-blue: #08A5D9;
+  --brand-lime: #B8E000;
+  --brand-pink: #E6007E;
+  --brand-yellow: #FFE500;
+
+  --brand-dark: #222222;
+  --brand-gray: #555555;
+  --brand-light-gray: #777777;
+  --brand-border: #dddddd;
+  --brand-white: #ffffff;
+
+  /* Override old dark theme */
+  --bg-gradient-onyx: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f5f5f5 100%
+  );
+
+  --bg-gradient-jet: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f7f7f7 100%
+  );
+
+  --bg-gradient-yellow-1: linear-gradient(
+    135deg,
+    #08A5D9 0%,
+    #B8E000 100%
+  );
+
+  --bg-gradient-yellow-2: linear-gradient(
+    135deg,
+    rgba(8, 165, 217, 0.15) 0%,
+    rgba(184, 224, 0, 0.15) 100%
+  );
+
+  --border-gradient-onyx: linear-gradient(
+    135deg,
+    #08A5D9 0%,
+    #E6007E 50%,
+    #FFE500 100%
+  );
+
+  --text-gradient-yellow: linear-gradient(
+    90deg,
+    #08A5D9 0%,
+    #E6007E 50%,
+    #B8E000 100%
+  );
+
+  /* SOLID COLORS */
+  --jet: #dddddd;
+  --onyx: #eeeeee;
+  --eerie-black-1: #ffffff;
+  --eerie-black-2: #ffffff;
+  --smoky-black: #ffffff;
+
+  --white-1: #222222;
+  --white-2: #222222;
+
+  --orange-yellow-crayola: #08A5D9;
+  --vegas-gold: #E6007E;
+
+  --light-gray: #444444;
+  --light-gray-70: rgba(68, 68, 68, 0.7);
+
+  --bittersweet-shimmer: #E6007E;
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+html,
+body {
+  background: #ffffff !important;
+  color: #222222 !important;
+}
+
+body {
+  min-height: 100vh;
+}
+
+
+/* =========================================================
+   SIDEBAR + ARTICLES
+   ========================================================= */
+
+.sidebar,
+article {
+  background: #ffffff !important;
+  color: #222222 !important;
+  border: 1px solid #dddddd !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+.h2,
+.h3,
+.h4,
+.h5 {
+  color: #222222 !important;
+}
+
+
+/* =========================================================
+   ARTICLE TITLE
+   ========================================================= */
+
+.article-title {
+  color: #222222 !important;
+}
+
+.article-title::after {
+  background: linear-gradient(
+    90deg,
+    #08A5D9,
+    #E6007E,
+    #FFE500
+  ) !important;
+}
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+.about-text,
+.service-item-text,
+.testimonials-text,
+.timeline-text,
+.blog-text {
+  color: #444444 !important;
+}
+
+.contact-title,
+.blog-meta :is(.blog-category, time),
+.project-category {
+  color: #777777 !important;
+}
+
+
+/* =========================================================
+   NAME / PROFILE
+   ========================================================= */
+
+.info-content .name {
+  color: #222222 !important;
+}
+
+.info-content .title {
+  background: #08A5D9 !important;
+  color: #ffffff !important;
+}
+
+
+/* =========================================================
+   ICON BOX
+   ========================================================= */
+
+.icon-box {
+  background: linear-gradient(
+    135deg,
+    #08A5D9,
+    #E6007E
+  ) !important;
+
+  color: #ffffff !important;
+}
+
+.icon-box::before {
+  background: #ffffff !important;
+}
+
+
+/* =========================================================
+   CONTACT LINKS
+   ========================================================= */
+
+.contact-info :is(.contact-link, time, address) {
+  color: #222222 !important;
+}
+
+.contact-link:hover {
+  color: #08A5D9 !important;
+}
+
+
+/* =========================================================
+   SOCIAL ICONS
+   ========================================================= */
+
+.social-item .social-link {
+  color: #555555 !important;
+}
+
+.social-item .social-link:hover {
+  color: #E6007E !important;
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.navbar {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid #dddddd !important;
+
+  box-shadow:
+    0 -5px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.navbar-link {
+  color: #555555 !important;
+}
+
+.navbar-link:hover,
+.navbar-link:focus {
+  color: #08A5D9 !important;
+}
+
+.navbar-link.active {
+  color: #E6007E !important;
+}
+
+
+/* =========================================================
+   SEPARATOR
+   ========================================================= */
+
+.separator {
+  background: #dddddd !important;
+}
+
+
+/* =========================================================
+   SERVICES
+   ========================================================= */
+
+.service-item {
+  background: linear-gradient(
+    135deg,
+    #08A5D9,
+    #E6007E,
+    #FFE500
+  ) !important;
+}
+
+.service-item::before {
+  background: #ffffff !important;
+}
+
+.service-item:hover {
+  box-shadow:
+    0 12px 30px rgba(8, 165, 217, 0.18) !important;
+}
+
+.service-item-title {
+  color: #222222 !important;
+}
+
+
+/* =========================================================
+   CONTENT CARDS
+   ========================================================= */
+
+.content-card {
+  background: linear-gradient(
+    135deg,
+    #08A5D9,
+    #E6007E
+  ) !important;
+}
+
+.content-card::before {
+  background: #ffffff !important;
+}
+
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+
+.timeline-list span {
+  color: #08A5D9 !important;
+}
+
+.timeline-item:not(:last-child)::before {
+  background: #dddddd !important;
+}
+
+.timeline-item::after {
+  background: #E6007E !important;
+  box-shadow: 0 0 0 4px #ffffff !important;
+}
+
+
+/* =========================================================
+   SKILLS
+   ========================================================= */
+
+.skill .title-wrapper data {
+  color: #444444 !important;
+}
+
+.skill-progress-bg {
+  background: #eeeeee !important;
+}
+
+.skill-progress-fill {
+  background: linear-gradient(
+    90deg,
+    #08A5D9,
+    #E6007E,
+    #FFE500
+  ) !important;
+}
+
+
+/* =========================================================
+   PORTFOLIO FILTER
+   ========================================================= */
+
+.filter-item button {
+  color: #555555 !important;
+}
+
+.filter-item button:hover {
+  color: #08A5D9 !important;
+}
+
+.filter-item button.active {
+  color: #E6007E !important;
+}
+
+
+/* =========================================================
+   MOBILE FILTER
+   ========================================================= */
+
+.filter-select {
+  background: #ffffff !important;
+  color: #444444 !important;
+  border: 1px solid #dddddd !important;
+}
+
+.select-list {
+  background: #ffffff !important;
+  border: 1px solid #dddddd !important;
+}
+
+.select-item button {
+  background: #ffffff !important;
+  color: #444444 !important;
+}
+
+.select-item button:hover {
+  background: #f3f3f3 !important;
+}
+
+
+/* =========================================================
+   PROJECTS
+   ========================================================= */
+
+.project-img {
+  background: #eeeeee !important;
+}
+
+.project-item-icon-box {
+  background: #ffffff !important;
+  color: #08A5D9 !important;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.project-title {
+  color: #222222 !important;
+}
+
+.project-category {
+  color: #777777 !important;
+
+
+/* =========================================================
+   BLOG
+   ========================================================= */
+
+.blog-post-item > a {
+  background: linear-gradient(
+    135deg,
+    #08A5D9,
+    #E6007E
+  ) !important;
+}
+
+.blog-post-item > a::before {
+  background: #ffffff !important;
+}
+
+.blog-item-title {
+  color: #222222 !important;
+}
+
+.blog-post-item > a:hover .blog-item-title {
+  color: #08A5D9 !important;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.form-input {
+  background: #ffffff !important;
+  color: #222222 !important;
+  border: 1px solid #cccccc !important;
+}
+
+.form-input::placeholder {
+  color: #999999 !important;
+}
+
+.form-input:focus {
+  border-color: #08A5D9 !important;
+  box-shadow: 0 0 0 2px rgba(8, 165, 217, 0.12);
+}
+
+
+/* =========================================================
+   FORM BUTTON
+   ========================================================= */
+
+.form-btn {
+  background: linear-gradient(
+    90deg,
+    #08A5D9,
+    #E6007E,
+    #FFE500
+  ) !important;
+
+  color: #ffffff !important;
+}
+
+.form-btn::before {
+  background: transparent !important;
+}
+
+.form-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 20px rgba(8, 165, 217, 0.25) !important;
+}
+
+
+/* =========================================================
+   MAP
+   ========================================================= */
+
+.mapbox {
+  border: 2px solid #08A5D9 !important;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+.has-scrollbar::-webkit-scrollbar-track {
+  background: #eeeeee !important;
+}
+
+.has-scrollbar::-webkit-scrollbar-thumb {
+  background: #08A5D9 !important;
+}
+
+.has-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #E6007E !important;
+}
+
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  background: #B8E000 !important;
+  color: #222222 !important;
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+:focus {
+  outline-color: #08A5D9 !important;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #E6007E !important;
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.testimonials-modal {
+  background: #ffffff !important;
+  border: 1px solid #dddddd !important;
+}
+
+.modal-close-btn {
+  background: #eeeeee !important;
+  color: #222222 !important;
+}
+
+.modal-content time {
+  color: #777777 !important;
+}
+
+.modal-content p {
+  color: #444444 !important;
+}
+
+
+/* =========================================================
+   OVERLAY
+   ========================================================= */
+
+.overlay {
+  background: rgba(0, 0, 0, 0.45) !important;
+}
+
+
+/* =========================================================
+   FORCE PAGE BACKGROUND
+   ========================================================= */
+
+main,
+.main-content,
+article[data-page] {
+  background: transparent !important;
+}
+
+
+/* =========================================================
+   FORCE ACTIVE PAGE
+   ========================================================= */
+
+[data-page].active {
+  background: #ffffff !important;
+  color: #222222 !important;
+}
+
+
+/* =========================================================
+   EXTRA STRONG OVERRIDES
+   ========================================================= */
+
+body,
+main,
+.sidebar,
+article,
+.navbar,
+.service-item::before,
+.content-card::before,
+.blog-post-item > a::before,
+.filter-select,
+.select-list,
+.select-item button,
+.testimonials-modal,
+.form-input {
+  color-scheme: light !important;
+}
