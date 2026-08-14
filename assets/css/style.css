@@ -2473,3 +2473,55 @@ textarea:focus-visible {
   }
 
 }
+/* =================================
+   PAGE NAVIGATION
+================================= */
+
+[data-page] {
+  display: none;
+}
+
+[data-page].active {
+  display: block;
+}
+
+
+/* =================================
+   NAVIGATION BUTTONS
+================================= */
+
+.navbar-link {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.navbar-link.active {
+  color: #ffdb70;
+}
+
+
+/* =================================
+   PORTFOLIO FILTER
+================================= */
+
+[data-filter-item] {
+  display: none;
+}
+
+[data-filter-item].active {
+  display: block;
+}
+
+
+/* =================================
+   MOBILE FILTER
+================================= */
+
+.select-list {
+  display: none;
+}
+
+.filter-select.active + .select-list {
+  display: block;
+}
