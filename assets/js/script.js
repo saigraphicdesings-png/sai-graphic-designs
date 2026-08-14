@@ -3,14 +3,11 @@
 /* ================================
    SIDEBAR CONTACT TOGGLE
 ================================ */
-// ================================
-// PAGE NAVIGATION
-// ================================
 
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
-if (sidebarBtn) {
+if (sidebarBtn && sidebar) {
   sidebarBtn.addEventListener("click", function () {
     sidebar.classList.toggle("active");
   });
@@ -22,59 +19,64 @@ if (sidebarBtn) {
    About / Resume / Portfolio / Blog / Contact
 ================================ */
 
-const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const navLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-navigationLinks.forEach(function (link) {
-navLinks.forEach((link) => {
-
-  link.addEventListener("click", () => {
+navLinks.forEach(function (link) {
 
   link.addEventListener("click", function () {
-    const pageName = link.getAttribute("data-nav-link");
 
-    const targetPage = this.dataset.navLink;
+    // Get the page name
+    const pageName = this.getAttribute("data-nav-link");
+
     console.log("Clicked:", pageName);
 
-    /* Remove active from every navigation button */
-    navigationLinks.forEach(function (navLink) {
+    /* -------------------------------
+       Remove active from all buttons
+    -------------------------------- */
+
+    navLinks.forEach(function (navLink) {
       navLink.classList.remove("active");
-    // Remove active from all navigation buttons
-    navLinks.forEach((item) => {
-      item.classList.remove("active");
     });
 
-    /* Add active to clicked button */
-    this.classList.add("active");
-    // Add active to clicked navigation button
-    link.classList.add("active");
+    /* -------------------------------
+       Add active to clicked button
+    -------------------------------- */
 
-    /* Hide every page */
+    this.classList.add("active");
+
+    /* -------------------------------
+       Hide all pages
+    -------------------------------- */
+
     pages.forEach(function (page) {
-    // Hide all pages
-    pages.forEach((page) => {
       page.classList.remove("active");
     });
 
-    /* Show selected page */
-    const target = document.querySelector(
-      '[data-page="' + targetPage + '"]'
-    // Show selected page
+    /* -------------------------------
+       Show selected page
+    -------------------------------- */
+
     const selectedPage = document.querySelector(
-      `[data-page="${pageName}"]`
+      '[data-page="' + pageName + '"]'
     );
 
-    if (target) {
-      target.classList.add("active");
     if (selectedPage) {
+
       selectedPage.classList.add("active");
+
       console.log("Showing:", pageName);
+
     } else {
+
       console.log("Page not found:", pageName);
+
     }
 
-    /* Scroll to top */
+    /* -------------------------------
+       Scroll to top
+    -------------------------------- */
+
     window.scrollTo({
       top: 0,
       behavior: "smooth"
@@ -100,14 +102,18 @@ filterButtons.forEach(function (button) {
       .trim()
       .toLowerCase();
 
-    /* Active filter button */
+    /* Remove active from all filter buttons */
+
     filterButtons.forEach(function (btn) {
       btn.classList.remove("active");
     });
 
+    /* Add active to selected filter */
+
     this.classList.add("active");
 
     /* Filter projects */
+
     filterItems.forEach(function (item) {
 
       const itemCategory = item.dataset.category;
@@ -116,9 +122,13 @@ filterButtons.forEach(function (button) {
         selectedCategory === "all" ||
         selectedCategory === itemCategory
       ) {
+
         item.classList.add("active");
+
       } else {
+
         item.classList.remove("active");
+
       }
 
     });
@@ -137,9 +147,6 @@ const selectItems = document.querySelectorAll("[data-select-item]");
 const selectValue = document.querySelector("[data-select-value]");
 
 if (select) {
-// ================================
-// SIDEBAR
-// ================================
 
   select.addEventListener("click", function () {
     select.classList.toggle("active");
@@ -147,21 +154,28 @@ if (select) {
 
 }
 
+
 selectItems.forEach(function (item) {
 
   item.addEventListener("click", function () {
 
     const selectedValue = this.textContent.trim();
 
+    /* Change selected value */
+
     if (selectValue) {
       selectValue.textContent = selectedValue;
     }
+
+    /* Close dropdown */
 
     if (select) {
       select.classList.remove("active");
     }
 
     const selectedCategory = selectedValue.toLowerCase();
+
+    /* Filter projects */
 
     filterItems.forEach(function (project) {
 
@@ -171,9 +185,13 @@ selectItems.forEach(function (item) {
         selectedCategory === "all" ||
         category === selectedCategory
       ) {
+
         project.classList.add("active");
+
       } else {
+
         project.classList.remove("active");
+
       }
 
     });
@@ -198,18 +216,25 @@ if (form && formButton) {
     input.addEventListener("input", function () {
 
       if (form.checkValidity()) {
+
         formButton.removeAttribute("disabled");
+
       } else {
+
         formButton.setAttribute("disabled", "");
+
       }
-const sidebar = document.querySelector("[data-sidebar]");
-const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
     });
-if (sidebarBtn && sidebar) {
 
-  sidebarBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("active");
+  });
+
+  form.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+    alert("Thank you! Your message has been received.");
+
   });
 
 }
