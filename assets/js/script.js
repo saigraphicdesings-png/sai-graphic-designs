@@ -1,5 +1,6 @@
 "use strict";
 
+
 /* =========================
    SIDEBAR TOGGLE
 ========================= */
@@ -7,15 +8,17 @@
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
-if (sidebarBtn && sidebar) {
+if (sidebar && sidebarBtn) {
+
   sidebarBtn.addEventListener("click", function () {
     sidebar.classList.toggle("active");
   });
+
 }
 
 
 /* =========================
-   NAVIGATION
+   PAGE NAVIGATION
 ========================= */
 
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
@@ -25,7 +28,10 @@ navigationLinks.forEach(function (link) {
 
   link.addEventListener("click", function () {
 
-    const targetPage = link.textContent.trim().toLowerCase();
+    // Get page name directly from data-nav-link
+    const targetPage = link.getAttribute("data-nav-link");
+
+    console.log("Opening page:", targetPage);
 
     // Remove active from all navigation buttons
     navigationLinks.forEach(function (navLink) {
@@ -35,18 +41,21 @@ navigationLinks.forEach(function (link) {
     // Add active to clicked button
     link.classList.add("active");
 
-    // Show selected page
+    // Hide all pages
     pages.forEach(function (page) {
-
-      if (page.dataset.page === targetPage) {
-        page.classList.add("active");
-      } else {
-        page.classList.remove("active");
-      }
-
+      page.classList.remove("active");
     });
 
-    // Scroll page to top
+    // Show selected page
+    const target = document.querySelector(
+      `[data-page="${targetPage}"]`
+    );
+
+    if (target) {
+      target.classList.add("active");
+    }
+
+    // Scroll to top
     window.scrollTo({
       top: 0,
       behavior: "smooth"
@@ -109,6 +118,7 @@ if (select) {
   });
 
 }
+
 
 selectItems.forEach(function (item) {
 
