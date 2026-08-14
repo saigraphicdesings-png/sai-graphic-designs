@@ -1,38 +1,28 @@
 'use strict';
 
-/* =========================================
-   ELEMENTS
-========================================= */
+
+// ========================================
+// SIDEBAR
+// ========================================
 
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
-const navigationLinks = document.querySelectorAll("[data-nav-link]");
-const pages = document.querySelectorAll("[data-page]");
-
-
-/* =========================================
-   SIDEBAR TOGGLE
-========================================= */
-
-if (sidebar && sidebarBtn) {
-
+if (sidebarBtn && sidebar) {
   sidebarBtn.addEventListener("click", function () {
-
     sidebar.classList.toggle("active");
-
   });
-
 }
 
 
-/* =========================================
-   PAGE NAVIGATION
-========================================= */
+// ========================================
+// PAGE NAVIGATION
+// ========================================
+
+const navigationLinks = document.querySelectorAll("[data-nav-link]");
+const pages = document.querySelectorAll("[data-page]");
 
 function showPage(pageName) {
-
-  /* Hide all pages */
 
   pages.forEach(function (page) {
 
@@ -40,35 +30,31 @@ function showPage(pageName) {
 
       page.classList.add("active");
 
+      // Force the page to be visible
+      page.style.display = "block";
+
     } else {
 
       page.classList.remove("active");
 
+      // Hide other pages
+      page.style.display = "none";
+
     }
 
   });
 
 
-  /* Update navbar buttons */
+  navigationLinks.forEach(function (link) {
 
-  navigationLinks.forEach(function (button) {
-
-    const target = button.dataset.pageTarget;
-
-    if (target === pageName) {
-
-      button.classList.add("active");
-
+    if (link.dataset.target === pageName) {
+      link.classList.add("active");
     } else {
-
-      button.classList.remove("active");
-
+      link.classList.remove("active");
     }
 
   });
 
-
-  /* Scroll to top */
 
   window.scrollTo({
     top: 0,
@@ -78,39 +64,31 @@ function showPage(pageName) {
 }
 
 
-/* =========================================
-   NAVIGATION BUTTON CLICK
-========================================= */
+// Navigation button click
 
-navigationLinks.forEach(function (button) {
+navigationLinks.forEach(function (link) {
 
-  button.addEventListener("click", function (event) {
+  link.addEventListener("click", function (event) {
 
     event.preventDefault();
 
-    const pageName = this.dataset.pageTarget;
+    const pageName = this.dataset.target;
 
-    if (pageName) {
-
-      showPage(pageName);
-
-    }
+    showPage(pageName);
 
   });
 
 });
 
 
-/* =========================================
-   OPEN ABOUT PAGE ON LOAD
-========================================= */
+// Show About page when website loads
 
 showPage("about");
 
 
-/* =========================================
-   TESTIMONIAL MODAL
-========================================= */
+// ========================================
+// TESTIMONIAL MODAL
+// ========================================
 
 const testimonialsItem =
   document.querySelectorAll("[data-testimonials-item]");
@@ -146,9 +124,7 @@ const testimonialsText =
 function toggleModal() {
 
   if (modalContainer) {
-
     modalContainer.classList.toggle("active");
-
   }
 
 }
@@ -159,23 +135,17 @@ testimonialsItem.forEach(function (item, index) {
   item.addEventListener("click", function () {
 
     if (modalImg && testimonialsAvatar[index]) {
-
       modalImg.src = testimonialsAvatar[index].src;
-
     }
 
     if (modalTitle && testimonialsTitle[index]) {
-
       modalTitle.innerHTML =
         testimonialsTitle[index].innerHTML;
-
     }
 
     if (modalText && testimonialsText[index]) {
-
       modalText.innerHTML =
         testimonialsText[index].innerHTML;
-
     }
 
     toggleModal();
@@ -186,28 +156,18 @@ testimonialsItem.forEach(function (item, index) {
 
 
 if (modalCloseBtn) {
-
-  modalCloseBtn.addEventListener(
-    "click",
-    toggleModal
-  );
-
+  modalCloseBtn.addEventListener("click", toggleModal);
 }
 
 
 if (overlay) {
-
-  overlay.addEventListener(
-    "click",
-    toggleModal
-  );
-
+  overlay.addEventListener("click", toggleModal);
 }
 
 
-/* =========================================
-   PORTFOLIO FILTER
-========================================= */
+// ========================================
+// PORTFOLIO FILTER
+// ========================================
 
 const filterBtns =
   document.querySelectorAll("[data-filter-btn]");
@@ -216,32 +176,24 @@ const filterItems =
   document.querySelectorAll("[data-filter-item]");
 
 
-filterBtns.forEach(function (button) {
+filterBtns.forEach(function (btn) {
 
-  button.addEventListener("click", function () {
+  btn.addEventListener("click", function () {
 
     const selectedValue =
       this.innerText.trim().toLowerCase();
 
-
-    /* Active button */
-
-    filterBtns.forEach(function (btn) {
-
-      btn.classList.remove("active");
-
+    filterBtns.forEach(function (button) {
+      button.classList.remove("active");
     });
 
     this.classList.add("active");
 
 
-    /* Filter projects */
-
     filterItems.forEach(function (item) {
 
       const category =
         item.dataset.category.toLowerCase();
-
 
       if (
         selectedValue === "all" ||
@@ -263,9 +215,9 @@ filterBtns.forEach(function (button) {
 });
 
 
-/* =========================================
-   PORTFOLIO MOBILE SELECT
-========================================= */
+// ========================================
+// PORTFOLIO MOBILE SELECT
+// ========================================
 
 const select =
   document.querySelector("[data-select]");
@@ -281,7 +233,7 @@ if (select) {
 
   select.addEventListener("click", function () {
 
-    this.classList.toggle("active");
+    select.classList.toggle("active");
 
   });
 
@@ -296,53 +248,21 @@ selectItems.forEach(function (item) {
       this.innerText.trim();
 
     if (selectValue) {
-
       selectValue.innerText = selectedValue;
-
     }
 
     if (select) {
-
       select.classList.remove("active");
-
     }
-
-
-    /* Filter portfolio */
-
-    const selectedCategory =
-      selectedValue.toLowerCase();
-
-
-    filterItems.forEach(function (project) {
-
-      const category =
-        project.dataset.category.toLowerCase();
-
-
-      if (
-        selectedCategory === "all" ||
-        selectedCategory === category
-      ) {
-
-        project.classList.add("active");
-
-      } else {
-
-        project.classList.remove("active");
-
-      }
-
-    });
 
   });
 
 });
 
 
-/* =========================================
-   CONTACT FORM
-========================================= */
+// ========================================
+// CONTACT FORM
+// ========================================
 
 const form =
   document.querySelector("[data-form]");
@@ -371,46 +291,6 @@ if (form && formBtn) {
       }
 
     });
-
-  });
-
-
-  /* Contact form submit */
-
-  form.addEventListener("submit", function (event) {
-
-    event.preventDefault();
-
-    const name =
-      form.querySelector('[name="fullname"]').value;
-
-    const email =
-      form.querySelector('[name="email"]').value;
-
-    const message =
-      form.querySelector('[name="message"]').value;
-
-
-    const whatsappMessage =
-      `Hello Sai Graphic Designs,
-
-Name: ${name}
-
-Email: ${email}
-
-Message:
-${message}`;
-
-
-    const whatsappURL =
-      "https://wa.me/916381128781?text=" +
-      encodeURIComponent(whatsappMessage);
-
-
-    window.open(
-      whatsappURL,
-      "_blank"
-    );
 
   });
 
