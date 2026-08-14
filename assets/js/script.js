@@ -16,67 +16,52 @@ if (sidebarBtn && sidebar) {
 
 /* ================================
    PAGE NAVIGATION
-   About / Resume / Portfolio / Blog / Contact
 ================================ */
 
-const navLinks = document.querySelectorAll("[data-nav-link]");
-const pages = document.querySelectorAll("[data-page]");
+const navLinks = document.querySelectorAll(".navbar-link[data-nav-link]");
+const pages = document.querySelectorAll("article[data-page]");
+
+console.log("NAV LINKS:", navLinks.length);
+console.log("PAGES:", pages.length);
 
 navLinks.forEach(function (link) {
 
-  link.addEventListener("click", function () {
+  link.addEventListener("click", function (event) {
 
-    // Get the page name
-    const pageName = this.getAttribute("data-nav-link");
+    event.preventDefault();
 
-    console.log("Clicked:", pageName);
+    const pageName = this.dataset.navLink;
 
-    /* -------------------------------
-       Remove active from all buttons
-    -------------------------------- */
+    console.log("CLICKED:", pageName);
 
-    navLinks.forEach(function (navLink) {
-      navLink.classList.remove("active");
+    /* Remove active from all buttons */
+    navLinks.forEach(function (nav) {
+      nav.classList.remove("active");
     });
 
-    /* -------------------------------
-       Add active to clicked button
-    -------------------------------- */
-
-    this.classList.add("active");
-
-    /* -------------------------------
-       Hide all pages
-    -------------------------------- */
-
+    /* Remove active from all pages */
     pages.forEach(function (page) {
       page.classList.remove("active");
     });
 
-    /* -------------------------------
-       Show selected page
-    -------------------------------- */
+    /* Activate clicked button */
+    this.classList.add("active");
 
+    /* Find requested page */
     const selectedPage = document.querySelector(
-      '[data-page="' + pageName + '"]'
+      'article[data-page="' + pageName + '"]'
     );
 
-    if (selectedPage) {
+    console.log("SELECTED PAGE:", selectedPage);
 
+    /* Show requested page */
+    if (selectedPage) {
       selectedPage.classList.add("active");
 
-      console.log("Showing:", pageName);
-
-    } else {
-
-      console.log("Page not found:", pageName);
-
+      console.log("OPENED:", pageName);
     }
 
-    /* -------------------------------
-       Scroll to top
-    -------------------------------- */
-
+    /* Scroll to top */
     window.scrollTo({
       top: 0,
       behavior: "smooth"
