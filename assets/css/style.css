@@ -2440,6 +2440,18 @@ textarea:focus-visible {
   outline-offset: 3px;
 }
 
+/* =========================================
+   PAGE NAVIGATION
+   About / Resume / Portfolio / Blog / Contact
+========================================= */
+
+[data-page] {
+  display: none;
+}
+
+[data-page].active {
+  display: block;
+}
 
 /*-----------------------------------*\
   #REDUCED MOTION
