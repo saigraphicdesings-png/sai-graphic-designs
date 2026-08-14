@@ -1,39 +1,54 @@
 "use strict";
 
 /* ================================
+   SIDEBAR CONTACT TOGGLE
+================================ */
+
+const sidebar = document.querySelector("[data-sidebar]");
+const sidebarBtn = document.querySelector("[data-sidebar-btn]");
+
+if (sidebarBtn) {
+  sidebarBtn.addEventListener("click", function () {
+    sidebar.classList.toggle("active");
+  });
+}
+
+
+/* ================================
    PAGE NAVIGATION
+   About / Resume / Portfolio / Blog / Contact
 ================================ */
 
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-navigationLinks.forEach((link) => {
+navigationLinks.forEach(function (link) {
 
   link.addEventListener("click", function () {
 
     const targetPage = this.dataset.navLink;
 
-    /* Remove active from all pages */
-    pages.forEach((page) => {
-      page.classList.remove("active");
-    });
-
-    /* Remove active from all navigation buttons */
-    navigationLinks.forEach((navLink) => {
+    /* Remove active from every navigation button */
+    navigationLinks.forEach(function (navLink) {
       navLink.classList.remove("active");
     });
 
+    /* Add active to clicked button */
+    this.classList.add("active");
+
+    /* Hide every page */
+    pages.forEach(function (page) {
+      page.classList.remove("active");
+    });
+
     /* Show selected page */
-    const targetElement = document.querySelector(
-      `[data-page="${targetPage}"]`
+    const target = document.querySelector(
+      '[data-page="' + targetPage + '"]'
     );
 
-    if (targetElement) {
-      targetElement.classList.add("active");
+    if (target) {
+      target.classList.add("active");
     }
-
-    /* Highlight selected navigation button */
-    this.classList.add("active");
 
     /* Scroll to top */
     window.scrollTo({
@@ -47,45 +62,29 @@ navigationLinks.forEach((link) => {
 
 
 /* ================================
-   SIDEBAR CONTACT BUTTON
-================================ */
-
-const sidebar = document.querySelector("[data-sidebar]");
-const sidebarBtn = document.querySelector("[data-sidebar-btn]");
-
-if (sidebarBtn && sidebar) {
-
-  sidebarBtn.addEventListener("click", function () {
-
-    sidebar.classList.toggle("active");
-
-  });
-
-}
-
-
-/* ================================
    PORTFOLIO FILTER
 ================================ */
 
 const filterButtons = document.querySelectorAll("[data-filter-btn]");
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
-filterButtons.forEach((button) => {
+filterButtons.forEach(function (button) {
 
   button.addEventListener("click", function () {
 
-    const selectedCategory = this.textContent.trim().toLowerCase();
+    const selectedCategory = this.textContent
+      .trim()
+      .toLowerCase();
 
     /* Active filter button */
-    filterButtons.forEach((btn) => {
+    filterButtons.forEach(function (btn) {
       btn.classList.remove("active");
     });
 
     this.classList.add("active");
 
     /* Filter projects */
-    filterItems.forEach((item) => {
+    filterItems.forEach(function (item) {
 
       const itemCategory = item.dataset.category;
 
@@ -110,39 +109,40 @@ filterButtons.forEach((button) => {
 ================================ */
 
 const select = document.querySelector("[data-select]");
-const selectValue = document.querySelector("[data-select-value]");
-const selectList = document.querySelector(".select-list");
 const selectItems = document.querySelectorAll("[data-select-item]");
+const selectValue = document.querySelector("[data-select-value]");
 
 if (select) {
 
   select.addEventListener("click", function () {
     select.classList.toggle("active");
-
-    if (selectList) {
-      selectList.classList.toggle("active");
-    }
   });
 
 }
 
-selectItems.forEach((item) => {
+selectItems.forEach(function (item) {
 
   item.addEventListener("click", function () {
 
-    const selectedCategory = this.textContent.trim();
+    const selectedValue = this.textContent.trim();
 
     if (selectValue) {
-      selectValue.textContent = selectedCategory;
+      selectValue.textContent = selectedValue;
     }
 
-    const category = selectedCategory.toLowerCase();
+    if (select) {
+      select.classList.remove("active");
+    }
 
-    filterItems.forEach((project) => {
+    const selectedCategory = selectedValue.toLowerCase();
+
+    filterItems.forEach(function (project) {
+
+      const category = project.dataset.category;
 
       if (
-        category === "all" ||
-        project.dataset.category === category
+        selectedCategory === "all" ||
+        category === selectedCategory
       ) {
         project.classList.add("active");
       } else {
@@ -150,14 +150,6 @@ selectItems.forEach((item) => {
       }
 
     });
-
-    if (select) {
-      select.classList.remove("active");
-    }
-
-    if (selectList) {
-      selectList.classList.remove("active");
-    }
 
   });
 
@@ -174,7 +166,7 @@ const formButton = document.querySelector("[data-form-btn]");
 
 if (form && formButton) {
 
-  formInputs.forEach((input) => {
+  formInputs.forEach(function (input) {
 
     input.addEventListener("input", function () {
 
