@@ -1295,24 +1295,17 @@ main {
 
 .project-img {
   position: relative;
-
   width: 100%;
   height: 200px;
-
   border-radius: 16px;
-
   overflow: hidden;
-
   margin-bottom: 15px;
-
   background: var(--onyx);
 }
 
-/* Smooth image zoom for EVERY project */
 .project-img img {
   width: 100%;
   height: 100%;
-
   object-fit: cover;
 
   transform: scale(1);
@@ -1321,7 +1314,7 @@ main {
     filter 0.45s ease;
 }
 
-/* Zoom when mouse points anywhere over the project */
+/* Zoom when hovering anywhere over the project */
 .project-item > a:hover .project-img img {
   transform: scale(1.10);
 }
@@ -1329,34 +1322,27 @@ main {
 /* Dark overlay */
 .project-img::before {
   content: "";
-
   position: absolute;
-
   inset: 0;
 
   background: transparent;
-
   z-index: 1;
 
-  transition: var(--transition-1);
   transition: background 0.45s ease;
 }
 
 .project-item > a:hover .project-img::before {
-  background: hsla(0, 0%, 0%, 0.5);
   background: hsla(0, 0%, 0%, 0.45);
 }
 
 /* Eye icon */
 .project-item-icon-box {
-  --scale: 0.8;
   --scale: 0.7;
 
   background: var(--jet);
   color: var(--orange-yellow-crayola);
 
   position: absolute;
-
   top: 50%;
   left: 50%;
 
@@ -1365,13 +1351,10 @@ main {
     scale(var(--scale));
 
   font-size: 20px;
-
   padding: 18px;
-
   border-radius: 12px;
 
   opacity: 0;
-
   z-index: 2;
 
   transition:
@@ -1381,59 +1364,11 @@ main {
 
 .project-item > a:hover .project-item-icon-box {
   --scale: 1;
-
   opacity: 1;
 }
 
 .project-item-icon-box ion-icon {
   --ionicon-stroke-width: 50px;
-}
-
-  background: var(--jet);
-
-  color: var(--orange-yellow-crayola);
-
-  position: absolute;
-
-  top: 50%;
-  left: 50%;
-
-  transform: translate(-50%, -50%) scale(var(--scale));
-
-  font-size: 20px;
-
-  padding: 18px;
-
-  border-radius: 12px;
-
-  opacity: 0;
-
-  z-index: 2;
-
-  transition: var(--transition-1);
-}
-
-.project-item > a:hover .project-item-icon-box {
-  --scale: 1;
-
-  opacity: 1;
-}
-
-.project-item-icon-box ion-icon {
-  --ionicon-stroke-width: 50px;
-}
-
-.project-img img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-
-  transition: var(--transition-1);
-}
-
-.project-item > a:hover img {
-  transform: scale(1.08);
 }
 
 .project-title,
