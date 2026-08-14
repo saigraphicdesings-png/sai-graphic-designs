@@ -1,63 +1,45 @@
-'use strict';
+"use strict";
 
+/*-----------------------------------*\
+  #NAVIGATION
+\*-----------------------------------*/
 
-/* =========================================
-   NAVIGATION
-========================================= */
-
-const navigationLinks = document.querySelectorAll('[data-nav-link]');
-const pages = document.querySelectorAll('[data-page]');
-
+const navigationLinks = document.querySelectorAll("[data-nav-link]");
+const pages = document.querySelectorAll("[data-page]");
 
 navigationLinks.forEach((link) => {
+  link.addEventListener("click", function () {
 
-  link.addEventListener('click', function () {
+    const targetPage = this.textContent.trim().toLowerCase();
 
-    const pageName = this.textContent
-      .trim()
-      .toLowerCase();
-
-
-    /* Remove active from all navigation links */
-
-    navigationLinks.forEach((navLink) => {
-      navLink.classList.remove('active');
-    });
-
-
-    /* Add active to clicked navigation link */
-
-    this.classList.add('active');
-
-
-    /* Show selected page */
-
+    // Remove active from all pages
     pages.forEach((page) => {
-
-      if (page.dataset.page === pageName) {
-
-        page.classList.add('active');
-
-      } else {
-
-        page.classList.remove('active');
-
-      }
-
+      page.classList.remove("active");
     });
 
+    // Add active to selected page
+    pages.forEach((page) => {
+      if (page.dataset.page === targetPage) {
+        page.classList.add("active");
+      }
+    });
 
-    /* Scroll page to top */
+    // Remove active from all navigation buttons
+    navigationLinks.forEach((navLink) => {
+      navLink.classList.remove("active");
+    });
 
+    // Add active to clicked button
+    this.classList.add("active");
+
+    // Scroll to top
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth"
     });
 
   });
-
 });
-
 
 
 /* =========================================
