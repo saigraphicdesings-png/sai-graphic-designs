@@ -2525,3 +2525,14 @@ textarea:focus-visible {
 .filter-select.active + .select-list {
   display: block;
 }
+/* ================================
+   PAGE VISIBILITY
+================================ */
+
+article {
+  display: none;
+}
+
+article.active {
+  display: block;
+}
