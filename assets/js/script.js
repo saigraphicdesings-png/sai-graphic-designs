@@ -216,3 +216,131 @@ if (form && formButton) {
   });
 
 }
+
+
+/* =========================================================
+   TEMPLATE SHOP
+   Separate template cart + WhatsApp order message
+========================================================= */
+
+(function () {
+  const shopTabs = document.querySelectorAll("[data-shop-filter]");
+  const shopSections = document.querySelectorAll("[data-shop-section]");
+  const shopAddButtons = document.querySelectorAll("[data-shop-add]");
+  const shopItems = document.querySelector("[data-shop-items]");
+  const shopTotal = document.querySelector("[data-shop-total]");
+  const shopCount = document.querySelector("[data-shop-count]");
+  const shopClear = document.querySelector("[data-shop-clear]");
+  const shopWhatsapp = document.querySelector("[data-shop-whatsapp]");
+
+  if (!shopAddButtons.length || !shopItems) return;
+
+  const WHATSAPP_NUMBER = "916381128781";
+  let templateCart = [];
+
+  function money(value) {
+    return "₹" + Number(value).toLocaleString("en-IN");
+  }
+
+  function renderCart() {
+    shopItems.innerHTML = "";
+
+    if (!templateCart.length) {
+      shopItems.innerHTML = '<p class="shop-empty">Your template cart is empty.</p>';
+    } else {
+      templateCart.forEach(function (item, index) {
+        const row = document.createElement("div");
+        row.className = "shop-cart-row";
+        row.innerHTML = `
+          <span class="shop-cart-row-name">${item.name}</span>
+          <span class="shop-cart-row-price">${money(item.price)}</span>
+          <button class="shop-remove-btn" type="button" data-shop-remove="${index}">Remove</button>
+        `;
+        shopItems.appendChild(row);
+      });
+    }
+
+    const total = templateCart.reduce((sum, item) => sum + Number(item.price), 0);
+    shopTotal.textContent = money(total);
+    shopCount.textContent = `${templateCart.length} ${templateCart.length === 1 ? "item" : "items"}`;
+
+    shopItems.querySelectorAll("[data-shop-remove]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        templateCart.splice(Number(this.dataset.shopRemove), 1);
+        renderCart();
+      });
+    });
+  }
+
+  shopTabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      const selected = this.dataset.shopFilter;
+
+      shopTabs.forEach(function (item) {
+        item.classList.toggle("active", item === tab);
+      });
+
+      shopSections.forEach(function (section) {
+        section.hidden = section.dataset.shopSection !== selected;
+      });
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  shopAddButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      templateCart.push({
+        name: this.dataset.name,
+        category: this.dataset.category,
+        price: Number(this.dataset.price)
+      });
+
+      renderCart();
+
+      const cart = document.querySelector("[data-shop-cart]");
+      if (cart) {
+        cart.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+  });
+
+  shopClear.addEventListener("click", function () {
+    templateCart = [];
+    renderCart();
+  });
+
+  shopWhatsapp.addEventListener("click", function () {
+    if (!templateCart.length) {
+      alert("Please add at least one template to the cart.");
+      return;
+    }
+
+    const total = templateCart.reduce((sum, item) => sum + Number(item.price), 0);
+
+    const lines = [
+      "🛍️ NEW TEMPLATE ORDER",
+      "━━━━━━━━━━━━━━━━━━",
+      "",
+      "📦 Selected Templates:"
+    ];
+
+    templateCart.forEach(function (item) {
+      lines.push(`• ${item.name} — ${money(item.price)}`);
+    });
+
+    lines.push(
+      "",
+      `💰 TOTAL: ${money(total)}`,
+      "",
+      "📌 Order Type: Template Shop",
+      "",
+      "Please confirm my template order."
+    );
+
+    const message = encodeURIComponent(lines.join("\n"));
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank", "noopener,noreferrer");
+  });
+
+  renderCart();
+})();
